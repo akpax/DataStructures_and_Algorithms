@@ -1,6 +1,7 @@
 def binary_search(input: list, target)->int:
     """
-     Returns index position of target if found. else returns None
+    Returns index position of target if found. else returns None
+    Note: This is an iterative solution.
     """
     input.sort() # sort list
     first = 0
