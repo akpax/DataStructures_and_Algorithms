@@ -1,6 +1,7 @@
 def recursive_binary_search(input: list, target: int) -> int:
     """
     Returns true if target in input, else false
+    
     """
     input.sort()
     if len(input) == 0:
