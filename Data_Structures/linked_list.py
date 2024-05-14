@@ -58,6 +58,23 @@ class LinkedList:
                 current = current.next_node
         return None
 
+    def node_at_index(self, index):
+        """
+        Return node at index if it exists and none if index does not exist
+        """
+        # if index == 0:
+        #     return self.head
+        pos = 0
+        current = self.head
+        while current:
+            if index == pos:
+                return current
+            else:
+                current = current.next_node
+                pos += 1
+
+        return None
+
     def insert(self, data, index):
         """
         Inserts new Node containing data at index, returns None if index not in list
