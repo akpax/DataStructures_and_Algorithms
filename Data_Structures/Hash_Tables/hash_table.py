@@ -28,7 +28,8 @@ class HashTable:
         """
         This function sets a new key value pair into the hash table.
         After the new entry is added, the capacity is checked and resized
-        if necessary.
+        if necessary.  If a key already exists, the value will be updated
+        with the specified value.
 
         Takes O(1) on average and O(n) for worst case.
         Note: average case only true if you have a good uniform hash function.
@@ -40,9 +41,8 @@ class HashTable:
             for entry in self.data[hash]:
                 # check if key is already in table
                 if entry["key"] == key:
-                    print(
-                        f"Key {key} already exists in hash table \n Not Adding Duplicate key."
-                    )
+                    # update value if allready in table
+                    entry["value"] = value
                     return
             # if key not in table create new entry and append to array
             self.data[hash].append(new_entry)
@@ -153,16 +153,13 @@ class HashTable:
 
 
 if __name__ == "__main__":
-    # h = HashTable(5)
-    # h.set("apple", "big")
-    # h.set("tod", "small")
-    # h.set("55", "numbers")
-    # h.set("j", "characters")
-    # h.set("purple goatee", "characters")
-    # print(h.data)
-    # print(h.remove("j"))
-    # print(h.data)
-    # print(h.remove("55"))
-    # print(h.data)
-    # h.set("j", "characters")
-    # print(h.data)
+    h = HashTable(5)
+    h.set("apple", "big")
+    h.set("tod", "small")
+    h.set("55", "numbers")
+    h.set("j", "characters")
+    h.set("purple goatee", "characters")
+    print(h.remove("55"))
+    print(h.data)
+    h.set("j", "people")
+    print(h.data)
