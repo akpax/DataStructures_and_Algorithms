@@ -43,6 +43,116 @@ class AVL_tree:
         self._update(node)
         return self._balance(node)
 
+    def remove(self, node, data):
+        """
+        Remove the node containing data from the tree.
+        Updates balancing favors, heights, references and
+        rebalances accordingly.
+        """
+        if self.root == None:
+            print("Tree is empty. No nodes to remove.")
+            return
+        # find phase
+        cmp = self._compare(node, data)
+
+        if cmp == -1:
+            self.remove(node.left, data)
+        elif cmp == 1:
+            self.remove(node.right, data)
+        # case when cmp == 0 means removal node is located
+        else:
+            # check case when node is a leaf node
+            if self._is_leaf(node):
+                # case when only 1 node in tree
+                if node == self.root:
+                    self.root = None
+                    return
+                else:
+                    parent = node.parent
+                    if parent.left == node:
+                        parent.left = None
+                    else:
+                        parent.right = None
+                    node.parent = None
+
+            # case when the node has a left subtree only
+            elif node.right == None:
+                if node == self.root:
+                    self.root = node.left
+                    node.left.parent = None
+                    node.left = None
+
+                else:
+                    parent = node.parent
+                    if parent.left == node:
+                        parent.left = node.left
+                    else:
+                        parent.right = node.left
+                    node.left.parent = parent
+                    node.parent = None
+                    node.left = None
+
+            # case when node has right subtree only
+            elif node.left == None:
+                if node == self.root:
+                    self.root = node.right
+                    node.right.parent = None
+                    node.right = None
+                parent = node.parent
+                if parent.left == node:
+                    parent.left = node.right
+                else:
+                    parent.right = node.right
+                node.right.parent = parent
+                node.parent = None
+                node.right = None
+            # case when node has left and right subtrees
+            else:
+                # determine which side to remove on based on
+                # subtree heights
+                if node.left.height > node.right.height:
+                    swap_node = self._dig_left(node.left)
+                    # swap data into node to remove
+                    node.data = swap_node.data
+                    # recursively remove swap node
+                    self.remove(node.left, swap_node.data)
+                else:
+                    swap_node = self._dig_right(node.right)
+                    # swap data into node to remove
+                    node.data = swap_node.data
+                    # recursively remove swap node
+                    self.remove(node.right, swap_node.data)
+        self._update(node)
+        return self._balance(node)
+
+    def _dig_left(self, node):
+        """
+        Finds the largest value in subtree.
+        Returns largest node
+        """
+        while node.right != None:
+            node = node.right
+        return node
+
+    def _dig_right(self, node):
+        """
+        Finds the smallest value in subtree.
+        Returns largest node
+        """
+        while node.left != None:
+            node = node.left
+        return node
+
+    def _is_leaf(self, node):
+        """
+        Check if node is  leaf node. Returns true if leaf node
+        and false if not a leaf node.
+        """
+        if node.left or node.right:
+            return False
+        else:
+            return True
+
     def _update(self, node):
         """
         Updates node height and balance factor..
@@ -143,7 +253,7 @@ class AVL_tree:
                 parent.right = swap_node
 
         if node == self.root:
-            self.root == swap_node
+            self.root = swap_node
 
         self._update(node)
         self._update(swap_node)
@@ -170,7 +280,7 @@ class AVL_tree:
                 parent.right = swap_node
 
         if node == self.root:
-            self.root == swap_node
+            self.root = swap_node
 
         self._update(node)
         self._update(swap_node)
@@ -234,29 +344,8 @@ class AVL_tree:
 
 if __name__ == "__main__":
     t = AVL_tree()
-    data = [5, 3, 7, 1, 13]
+    data = [7, 5, 8, 3, 13]
     for i in data:
         t.insert(t.root, i)
-    t.insert(t.root, 11)
-    """
-    Current Tree:
-                5
-            3       7
-        1               13           
-    """
-    # t.insert(t.root, 5)
-    # t.insert(t.root, 3)
-    # t.insert(t.root, 7)
-    # t.insert(t.root, 1)
-    # t.insert(t.root, 13)
-    # t.insert(t.root, 65)
-    # t.insert(t.root, 0)
-    # t.insert(t.root, 10)
-    # t.inorder(t.root)
-
-    """
-                5
-            3       7
-        1               13
-    0                10     65
-    """
+    t.remove(t.root, 3)
+    t.remove(t.root, 5)
