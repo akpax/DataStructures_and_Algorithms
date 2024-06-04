@@ -262,3 +262,148 @@ class Test_AVL_tree:
         assert avl_tree_fixture.root.left.left.parent == avl_tree_fixture.root.left
         assert avl_tree_fixture.root.left.right.parent == avl_tree_fixture.root.left
         assert avl_tree_fixture.root.left.parent == avl_tree_fixture.root
+
+    def test_removal_left_leaf_node_case_no_rebalance(self, avl_tree_fixture):
+        # rebuild tree such that it resembles tree below
+        avl_tree_fixture.root = None
+        data = [7, 5, 8, 3, 13]
+        for i in data:
+            avl_tree_fixture.insert(avl_tree_fixture.root, i)
+        """
+        Current Tree:
+                    7
+                5       8
+            3               13           
+        """
+
+        avl_tree_fixture.remove(avl_tree_fixture.root, 3)
+        """
+        Current Tree:
+                    7
+                5       8
+                           13           
+        """
+        # check data is correct
+        assert avl_tree_fixture.root.left.data == 5
+
+        # check heights are updated
+        assert avl_tree_fixture.root.left.height == 0
+
+        # check balance factors are updated
+        assert avl_tree_fixture.root.left.bf == 0
+        assert avl_tree_fixture.root.bf == 1
+
+        # check references
+        assert avl_tree_fixture.root.left.left == None
+        assert avl_tree_fixture.root.left.parent == avl_tree_fixture.root
+
+    def test_removal_left_leaf_node_case_w_rebalance(self, avl_tree_fixture):
+        # rebuild tree such that it resembles tree below
+        avl_tree_fixture.root = None
+        data = [7, 5, 8, 13]
+        for i in data:
+            avl_tree_fixture.insert(avl_tree_fixture.root, i)
+        """
+        Current Tree:
+                    7
+                5       8
+                            13           
+        """
+        avl_tree_fixture.remove(avl_tree_fixture.root, 5)
+        """
+        Post-Removal and Pre-Rebalance Tree:       Rebalanced tree:
+                    7                                     8
+                        8                             7       13
+                           13           
+        """
+        # check data is correct
+        assert avl_tree_fixture.root.left.data == 7
+        assert avl_tree_fixture.root.data == 8
+        assert avl_tree_fixture.root.right.data == 13
+
+        # check heights are updated
+        assert avl_tree_fixture.root.left.height == 0
+        assert avl_tree_fixture.root.right.height == 0
+        assert avl_tree_fixture.root.height == 1
+
+        # check balance factors are correctly updated
+        assert avl_tree_fixture.root.left.bf == 0
+        assert avl_tree_fixture.root.right.bf == 0
+        assert avl_tree_fixture.root.bf == 0
+
+        # check references
+        assert avl_tree_fixture.root.left.parent == avl_tree_fixture.root
+        assert avl_tree_fixture.root.right.parent == avl_tree_fixture.root
+
+    def test_removal_right_leaf_node_case_no_rebalance(self, avl_tree_fixture):
+        # rebuild tree such that it resembles tree below
+        avl_tree_fixture.root = None
+        data = [7, 5, 8, 3, 13]
+        for i in data:
+            avl_tree_fixture.insert(avl_tree_fixture.root, i)
+        """
+        Current Tree:
+                    7
+                5       8
+            3               13           
+        """
+
+        avl_tree_fixture.remove(avl_tree_fixture.root, 13)
+        """
+        Current Tree:
+                    7
+                5       8
+            3                       
+        """
+        # check data is correct
+        assert avl_tree_fixture.root.right.data == 8
+
+        # check heights are updated
+        assert avl_tree_fixture.root.right.height == 0
+
+        # check balance factors are updated
+        assert avl_tree_fixture.root.right.bf == 0
+        assert avl_tree_fixture.root.bf == -1
+
+        # check references
+        assert avl_tree_fixture.root.right.right == None
+        assert avl_tree_fixture.root.right.parent == avl_tree_fixture.root
+
+    def test_removal_right_leaf_node_case_w_rebalance(self, avl_tree_fixture):
+        # rebuild tree such that it resembles tree below
+        avl_tree_fixture.root = None
+        data = [7, 5, 8, 3]
+        for i in data:
+            avl_tree_fixture.insert(avl_tree_fixture.root, i)
+        """
+        Current Tree:
+                    7
+                5       8
+            3                         
+        """
+
+        avl_tree_fixture.remove(avl_tree_fixture.root, 8)
+        """
+        Post-Removal and Pre-Rebalance Tree:       Rebalanced tree:
+                     7                                   5
+                 5                                  3        7
+             3                        
+        """
+        # check data is correct
+        assert avl_tree_fixture.root.left.data == 3
+        assert avl_tree_fixture.root.data == 5
+        assert avl_tree_fixture.root.right.data == 7
+
+        # check heights are updated
+        assert avl_tree_fixture.root.left.height == 0
+        assert avl_tree_fixture.root.right.height == 0
+        assert avl_tree_fixture.root.height == 1
+
+        # check balance factors are correctly updated
+        assert avl_tree_fixture.root.left.bf == 0
+        assert avl_tree_fixture.root.right.bf == 0
+        assert avl_tree_fixture.root.bf == 0
+
+        # check references
+        assert avl_tree_fixture.root.left.parent == avl_tree_fixture.root
+        assert avl_tree_fixture.root.right.parent == avl_tree_fixture.root
