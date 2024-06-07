@@ -1,4 +1,4 @@
-from Data_Structures.linked_list import LinkedList
+from Data_Structures.Singly_and_Doubly_LInkedLists.linked_list import LinkedList
 
 
 def merge_sort(linked_list):
