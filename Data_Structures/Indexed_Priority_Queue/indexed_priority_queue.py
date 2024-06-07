@@ -1,6 +1,45 @@
 """
-The min indexed binary heap is meant to be utilized with a bi-directional hash table.
-The bi-directional hash table's role is to convert the keys into key indices (ki)
+Min Indexed D-ary Heap Implementation
+
+The min indexed binary heap is a data structure that efficiently supports the insertion, deletion, and lookup of 
+key-value pairs. This implementation uses a bi-directional hash table to map keys to key indices (ki) and vice versa.
+
+A d-ary heap is a generalization of a binary heap where each node has d children. This implementation allows 
+the degree of the heap (number of children per node) to be specified, making it flexible for various use cases.
+
+Key Operations:
+- `insert(ki, value)`: Inserts a key index (ki) and value into the heap.
+- `delete(ki)`: Deletes the specified key index (ki) and its value from the heap.
+- `update(ki, value)`: Updates the value associated with the specified key index (ki).
+- `decreaseKey(ki, value)`: Decreases the value associated with the specified key index (ki).
+- `increaseKey(ki, value)`: Increases the value associated with the specified key index (ki).
+- `peekMinKeyIndex()`: Returns the key index (ki) with the smallest value.
+- `pollMinKeyIndex()`: Removes and returns the key index (ki) with the smallest value.
+- `peekMinValue()`: Returns the smallest value in the heap.
+- `pollMinValue()`: Removes and returns the smallest value in the heap.
+
+The heap invariant is maintained using the `_swim` and `_sink` methods, which ensure that the heap property 
+is preserved after insertions and deletions.
+
+Attributes:
+- `D`: Degree of the heap (number of children per node).
+- `max_size`: Maximum size of the heap.
+- `size`: Current number of elements in the heap.
+- `child`: Lookup array for the first child of each node.
+- `parent`: Lookup array for the parent of each node.
+- `pm`: Position map that maps key indices (ki) to their node index (ni) in the heap.
+- `im`: Inverse map that maps node index (ni) in the heap to key indices (ki).
+- `value`: Array of values associated with the key indices (ki).
+
+Methods:
+- `_clear_node(ki)`: Clears data for the specified key index (ki).
+- `_swim(ni)`: Moves a node at index (ni) up the heap until the heap invariant is maintained.
+- `_sink(ni)`: Moves a node at index (ni) down the heap until the heap invariant is maintained.
+- `_smallest_child_ni(parent_ni)`: Returns the index of the smallest child node.
+- `_swap(ni1, ni2)`: Swaps nodes at indices (ni1) and (ni2).
+- `_parent_value(ni)`: Returns the value of the parent node of the node at index (ni).
+- `_node_value(ni)`: Returns the value of the node at index (ni).
+- `print_binary()`: Prints the binary heap structure.
 """
 
 

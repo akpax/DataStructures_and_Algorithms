@@ -1,5 +1,21 @@
 """
-Implementation of a queue using a Linked List 
+Queue Implementation
+
+A queue is a linear data structure that follows the First In First Out (FIFO) principle. This means that the first element added 
+to the queue will be the first one to be removed. It is similar to a real-world queue, like a line of people waiting for a service, 
+where the person who arrives first is served first.
+
+Key Operations:
+- `enqueue(data)`: Adds an element to the back of the queue.
+- `dequeue()`: Removes and returns the front element of the queue.
+- `peek()`: Returns the front element without removing it.
+- `contains(data)`: Checks if an element is present in the queue.
+- `remove(data)`: Removes a specific element from the queue.
+- `is_empty()`: Checks if the queue is empty.
+- `__repr__()`: Returns a string representation of the queue.
+
+This implementation uses a linked list to store the elements of the queue, ensuring efficient O(1) time complexity for 
+both enqueue and dequeue operations.
 """
 
 

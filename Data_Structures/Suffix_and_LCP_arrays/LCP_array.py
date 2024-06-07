@@ -1,3 +1,29 @@
+"""
+Longest Common Prefix (LCP) Array Implementation
+
+The Longest Common Prefix (LCP) array is a data structure used in conjunction with the suffix array to efficiently 
+solve various string processing problems. The LCP array stores the lengths of the longest common prefixes between 
+consecutive suffixes in the sorted suffix array.
+
+Key Features:
+- Efficiently constructs the LCP array based on the given suffix array and the original string.
+- Supports various applications such as pattern matching, finding the longest repeated substring, and more.
+
+How it works:
+- The LCP array is built by comparing each suffix with the previous one in the sorted suffix array.
+- The LCP array stores the length of the longest common prefix between each pair of consecutive suffixes.
+
+Key Operations:
+- `construct()`: Constructs the LCP array by comparing each suffix with the previous one in the sorted suffix array.
+- `_recreate_suffixes()`: Recreates the suffixes from the original string based on the suffix array.
+
+Attributes:
+- `suffix_array`: The suffix array of the original string.
+- `string`: The original string for which the LCP array is constructed.
+- `array`: The constructed LCP array.
+
+"""
+
 from suffix_array import SuffixArray
 
 

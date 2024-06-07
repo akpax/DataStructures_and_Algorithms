@@ -1,9 +1,32 @@
 """
-Hash table implemented using open addressing to handle hash collisions. 
-In this implementation, we use linear probing to implement open addressing.
-We will use P(x) = x for the linear probing to prevent cycles. 
-However, other methods to implement open addressing include:
-double hashing, quadratic probing, and pseudo random number generation.
+Hash Table Implementation Using Linear Probing
+
+This hash table uses open addressing to handle hash collisions. In this implementation, linear probing is used 
+to resolve collisions. Linear probing is a collision resolution method in which, upon a hash collision, 
+the algorithm checks the next slot in the array until an empty slot is found. This method uses P(x) = x for 
+the linear probing to prevent cycles.
+
+Hash collisions occur when two different keys hash to the same index in the hash table. Handling collisions 
+is crucial to maintaining the efficiency of the hash table operations.
+
+Tombstones are dummy objects used to mark the position of deleted elements in the hash table. They indicate 
+that a slot was previously occupied but is now available for insertion. Using tombstones helps in maintaining 
+the performance of the hash table by ensuring that search operations do not terminate prematurely when they 
+encounter a deleted slot.
+
+Other methods to implement open addressing include:
+- Double hashing
+- Quadratic probing
+- Pseudo random number generation
+
+Key Operations:
+- `set(key, value)`: Inserts or updates a key-value pair in the hash table.
+- `get(key)`: Retrieves the value associated with a given key.
+- `remove(key)`: Removes a key-value pair from the hash table.
+- `get_keys()`: Returns a list of all non-null and non-Tombstone keys.
+- `get_values()`: Returns a list of all non-null values.
+- `_increase_size(resize_factor)`: Increases the size of the hash table.
+- `_check_capacity()`: Checks if the current capacity exceeds the maximum capacity and resizes if necessary.
 """
 
 
@@ -85,6 +108,7 @@ class HashTableLinearProbe:
                 if T != None:
                     self.keys[T] = key
                     self.values[T] = value
+                    return
                 else:
                     self.keys[i] = key
                     self.values[i] = value
@@ -118,9 +142,9 @@ class HashTableLinearProbe:
                     # Open slots in previous k,v position
                     self.keys[i] = None
                     self.values[i] = None
-                    return self.values[T]
+                    return
                 else:
-                    return self.values[i]
+                    return self.values[i], i
             if self.keys[i] == None:
                 print("Key is not present in Hash Table")
                 return

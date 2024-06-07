@@ -1,9 +1,31 @@
 """
-Fenwick tree implementation. 
-Note: The Fenwick tree is 1-based while the user supplied values are zero-based.
+Fenwick Tree (Binary Indexed Tree) Implementation
+
+A Fenwick Tree, also known as a Binary Indexed Tree (BIT), is a data structure that provides efficient methods 
+for cumulative frequency tables. It allows querying prefix sums and updating elements in logarithmic time. 
+The Fenwick Tree is particularly useful for scenarios where there are frequent updates and prefix sum queries.
+
+Key Features:
+- Space-efficient: Requires O(n) space, where n is the number of elements.
+- Supports point updates and prefix sum queries in O(log n) time.
+- Suitable for problems involving dynamic cumulative frequency tables, such as range sum queries and updates.
+
+How it works:
+- The tree is represented as an array where each index stores the sum of a range of elements.
+- The parent-child relationship is determined by the binary representation of the indices.
+- The least significant bit (LSB) of an index determines the range of elements it covers.
+- To update an element, propagate the change to all relevant indices in the tree.
+- To get a prefix sum, accumulate the values from relevant indices up to the desired position.
+
+Operations:
+- `update(index, delta)`: Adds `delta` to the element at `index` and updates the tree accordingly.
+- `query(index)`: Returns the prefix sum from the start up to the given `index`.
+- `range_query(left, right)`: Returns the sum of elements in the range [left, right].
+
+This implementation is 1-based while the user-supplied values are zero-based.
 The user will interact with the data structure using zero-based indexing.
-After the Fenwick tree is initialized with the user-specified values, indexes 
-cannot be added or removed from the tree. 
+After the Fenwick Tree is initialized with the user-specified values, indexes 
+cannot be added or removed from the tree.
 """
 
 import copy
@@ -23,16 +45,6 @@ class FenwickTree:
 
         Takes O(n)
         """
-        # tree = copy.deepcopy(values)
-        # print(tree)
-        # for i in range(1, self.size):
-        #     j = i + self._LSB(i)
-        #     if j <= self.size:
-        #         # add child value to parent
-        #         # decrease index by 1 since byte integers are 1 based
-        #         tree[j - 1] += tree[i - 1]
-
-        # return tree
         tree = copy.deepcopy(values)
         # Fenwick trees are 1 -based so we add a null value to front of tree
         tree.insert(0, 0)
@@ -52,9 +64,10 @@ class FenwickTree:
         Note:
         - Indices are 0-based to correspond to the value indices.
         - The Fenwick Tree is assumed to be 1-based internally.
+        Takes O(log n)
         """
         try:
-            # prefix sum of start is exlusive bc we want to include the start
+            # prefix sum of start is exclusive bc we want to include the start
             # value in the sum
             return self._prefix_sum(stop) - self._prefix_sum(start - 1)
         except IndexError:
@@ -79,7 +92,7 @@ class FenwickTree:
     def _prefix_sum(self, index):
         """
         Performs the cumulative sum  of all elements from beginning of array to specified index.
-        The
+        Takes O(log n)
         """
         sum = 0
         # Convert user's zero-based index to 1-based index for Fenwick tree
@@ -103,6 +116,8 @@ class FenwickTree:
             Result: 0100 (int: 4)
         Perform bitwise & operation:
             1100 & 0100 = 0100
+
+        Takes O(1)
         """
         return num & -num
 

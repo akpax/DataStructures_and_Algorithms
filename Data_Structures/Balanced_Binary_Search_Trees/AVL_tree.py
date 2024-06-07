@@ -1,3 +1,26 @@
+"""
+AVL Tree (Balanced Binary Search Tree) Implementation
+
+An AVL tree is a self-balancing binary search tree where the difference between the heights of left and right 
+subtrees cannot be more than one for all nodes. This property ensures that the tree remains balanced, thereby 
+guaranteeing O(log n) time complexity for insertion, deletion, and lookup operations.
+
+Key Features:
+- Self-balancing: Automatically maintains a balanced tree, ensuring O(log n) time complexity for operations.
+- Each node has a balance factor (bf) which is the difference between the heights of its right and left subtrees.
+- Rotations (left and right) are used to maintain balance after insertions and deletions.
+
+Key Operations:
+- `insert(node, data)`: Inserts a new node with the specified data into the tree.
+- `remove(node, data)`: Removes the node with the specified data from the tree.
+- `preorder(node)`: Performs a pre-order traversal of the tree.
+- `inorder(node)`: Performs an in-order traversal of the tree. Nodes returned in order.
+- `postorder(node)`: Performs a post-order traversal of the tree.
+
+The implementation below provides these basic operations along with the necessary balancing logic.
+"""
+
+
 class Node:
     """
     Doubly linked node.
@@ -18,7 +41,10 @@ class AVL_tree:
         self.root = None
 
     def insert(self, node, data):
-        """"""
+        """
+        Insert a new node into the tree.
+        Takes O(log n)
+        """
         # case when tree is empty
         if self.root == None:
             self.root = Node(data)
@@ -47,7 +73,8 @@ class AVL_tree:
         """
         Remove the node containing data from the tree.
         Updates balancing favors, heights, references and
-        rebalances accordingly.
+        re-balances accordingly.
+        Takes O(log n)
         """
         if self.root == None:
             print("Tree is empty. No nodes to remove.")
@@ -210,14 +237,14 @@ class AVL_tree:
     def _rightRightCase(self, node):
         """
         This case occurs when node has a balance factor of +2
-        and the left child node has a balance factor of +1.
+        and the right child node has a balance factor of +1.
         """
         return self._left_rotation(node)
 
     def _rightLeftCase(self, node):
         """
         This case occurs when node has a balance factor of +2
-        and the left child node has a balance factor of -1.
+        and the right child node has a balance factor of -1.
         Two operations are performed:
             1. Right rotation is performed which converts the
                 left child node's balance factor to +1.

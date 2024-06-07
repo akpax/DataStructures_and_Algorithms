@@ -1,7 +1,27 @@
 """
-Hash table implemented using separate chaining to handle hash collisions. 
-In this implementation, we use an array, but some implementations use one or a mixture of
-binary trees, arrays, linked lists, self-balancing trees, etc.
+Hash Table Implementation Using Separate Chaining
+
+This hash table uses separate chaining to handle hash collisions. In this implementation, we use an array 
+where each slot can contains an array of entries that hash to the same index. Separate chaining ensures 
+that hash collisions are handled efficiently by allowing multiple elements to exist at the same index.
+
+Hash collisions occur when two different keys hash to the same index in the hash table. Separate chaining 
+allows us to handle these collisions by storing all elements that hash to the same index in a linked list.
+
+Other implementations can use one or a mixture of:
+- Binary trees
+- Arrays
+- Linked lists
+- Self-balancing trees, etc.
+
+Key Operations:
+- `set(key, value)`: Inserts or updates a key-value pair in the hash table.
+- `get(key)`: Retrieves the value associated with a given key.
+- `remove(key)`: Removes a key-value pair from the hash table.
+- `keys()`: Returns a list of all keys in the hash table.
+- `values()`: Returns a list of all values in the hash table.
+- `_increase_size(resize_factor)`: Increases the size of the hash table.
+- `_check_capacity()`: Checks if the current capacity exceeds the maximum capacity and resizes if necessary.
 """
 
 
@@ -153,13 +173,4 @@ class HashTableSeparateChaining:
 
 
 if __name__ == "__main__":
-    h = HashTableSeparateChaining(5)
-    h.set("apple", "big")
-    h.set("tod", "small")
-    h.set("55", "numbers")
-    h.set("j", "characters")
-    h.set("purple goatee", "characters")
-    print(h.remove("55"))
-    print(h.data)
-    h.set("j", "people")
-    print(h.data)
+    pass

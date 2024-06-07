@@ -1,3 +1,29 @@
+"""
+Singly Linked List Implementation
+
+A singly linked list is a linear data structure where each element is a separate object, called a node. 
+Each node contains data and a reference (or link) to the next node in the sequence. The first node in 
+a linked list is called the head, and the last node in a linked list points to None. This structure 
+allows for efficient insertion and deletion of elements.
+
+Key Features:
+- Dynamic size: The list can grow and shrink in size by adding or removing nodes.
+- Ease of insertion/deletion: Elements can be easily inserted or removed without reorganizing the entire structure.
+- Sequential access: Elements are accessed sequentially starting from the head.
+
+Key Operations:
+- `is_empty()`: Checks if the linked list is empty.
+- `size()`: Returns the number of nodes in the list.
+- `add(data)`: Adds a new node containing data at the head of the list.
+- `search(key)`: Searches for the first node containing data that matches the key.
+- `node_at_index(index)`: Returns the node at the specified index.
+- `insert(data, index)`: Inserts a new node containing data at the specified index.
+- `delete(key)`: Deletes the node containing data that matches the key.
+- `delete_at_index(index)`: Deletes the node at the specified index.
+- `__repr__()`: Returns a string representation of the list.
+"""
+
+
 class Node:
     """
     Object for storing a node of a singly linked list

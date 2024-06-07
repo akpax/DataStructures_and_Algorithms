@@ -1,3 +1,24 @@
+"""
+Doubly Linked List Implementation
+
+A doubly linked list is a type of linked list where each node contains a data part and two pointers, 
+one pointing to the next node and one pointing to the previous node. This allows traversal of the list 
+in both directions.  
+This implementation has references to the head and the tail which allows for constant time appending
+and prepending.
+
+Key Operations:
+- `append(data)`: Adds an element to the end of the list.
+- `prepend(data)`: Adds an element to the beginning of the list.
+- `insert(position, data)`: Inserts an element at the specified position.
+- `delete_by_value(data)`: Deletes the first occurrence of the specified value.
+- `delete_by_position(position)`: Deletes the element at the specified position.
+- `is_empty()`: Checks if the list is empty.
+- `__repr__()`: Returns a string representation of the list.
+
+"""
+
+
 class Node:
     """
     Object for storing a node of a doubly linked list
@@ -25,9 +46,18 @@ class DoublyLinkedList:
         self.length = 0
 
     def is_empty(self):
+        """
+        Checks if the list is empty.
+        Returns True if the list is empty, otherwise False.
+        Takes O(1).
+        """
         return self.head == None
 
     def append(self, data):
+        """
+        Appends a new node with the given data to the end of the list.
+        Takes O(1).
+        """
         new_node = Node(data)
         if self.head is None:
             self.head = new_node
@@ -42,6 +72,10 @@ class DoublyLinkedList:
             return
 
     def prepend(self, data):
+        """
+        Prepends a new node with the given data to the beginning of the list.
+        Takes O(1).
+        """
         new_node = Node(data)
         if self.head is None:
             self.head = new_node
@@ -56,6 +90,12 @@ class DoublyLinkedList:
             return
 
     def insert(self, position, data):
+        """
+        Inserts a new node with the given data at the specified position.
+        If the position is 0, prepends the data.
+        If the position is greater than or equal to the length of the list, appends the data.
+        Takes O(n).
+        """
         if position == 0:
             self.prepend(data)
             return
@@ -80,6 +120,10 @@ class DoublyLinkedList:
             return
 
     def delete_by_value(self, data):
+        """
+        Deletes the first node with the specified data.
+        Takes O(n).
+        """
         if self.head == None:
             print("head is empty. Nothing to delete")
             return
@@ -109,6 +153,10 @@ class DoublyLinkedList:
             return
 
     def delete_by_position(self, position):
+        """
+        Deletes the node at the specified position.
+        Takes O(n).
+        """
         if self.head is None:
             print("Linked List empty. Nothing to delete")
             return

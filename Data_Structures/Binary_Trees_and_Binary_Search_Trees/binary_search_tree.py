@@ -1,5 +1,25 @@
 """
-Binary search tree implemented using the Node class 
+Binary Search Tree (BST) Implementation
+
+A binary search tree (BST) is a data structure that maintains sorted order of elements, allowing for efficient 
+insertion, deletion, and lookup operations. Each node in the tree has at most two children, referred to as the 
+left and right child. In a BST, for each node, all elements in the left subtree are less than the node, and all 
+elements in the right subtree are greater than the node.
+
+Key Features:
+- Supports efficient insertion, deletion, and search operations.
+- Maintains elements in sorted order.
+- Average time complexity for operations is O(log n), but can degrade to O(n) in the worst case if the tree becomes unbalanced.
+
+Key Operations:
+- `insert(data)`: Inserts a new node with the specified data into the tree.
+- `search(data)`: Searches for a node with the specified data in the tree.
+- `remove(data)`: Removes the node with the specified data from the tree.
+- `preorder(node)`: Performs a pre-order traversal of the tree.
+- `inorder(node)`: Performs an in-order traversal of the tree.
+- `postorder(node)`: Performs a post-order traversal of the tree.
+
+This implementation does not include automatic balancing, so it may degrade to an unbalanced tree in some cases.
 """
 
 

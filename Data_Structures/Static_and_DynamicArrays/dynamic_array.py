@@ -1,3 +1,18 @@
+"""
+Dynamic and Static Arrays
+
+A static array has a fixed size and cannot be resized. It requires the size to be known at the time of creation. 
+Memory is allocated at the time of array creation, and operations like insertion and deletion require shifting elements, 
+which can be inefficient. Static arrays offer fast access times (O(1)) for reading and writing elements by index.
+
+A dynamic array, on the other hand, does not have a fixed size and can grow or shrink as needed. 
+It typically starts with a small size and automatically resizes itself when it becomes full. 
+Resizing usually involves allocating a new array of double the current size and copying elements over. 
+Dynamic arrays offer amortized O(1) time complexity for appending elements, though individual resizes take O(n) time. 
+Access times remain O(1), similar to static arrays, but they provide the flexibility to handle varying amounts of data efficiently.
+"""
+
+
 class DynamicArray:
     def __init__(self):
         self.arr = [None]
@@ -85,3 +100,7 @@ class DynamicArray:
 
     def __repr__(self):
         return f"{self.arr}"
+
+
+if __name__ == "__main__":
+    pass

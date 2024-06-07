@@ -1,6 +1,8 @@
 """
-Stack implemented using array. It can be implemented using linked lists as well
-Python has pop() and append() methods which function as pop and push for lists.
+Stack Implementation
+
+This stack is implemented using a dynamic array. Stacks can also be implemented using linked lists. 
+In Python, the built-in list methods `pop()` and `append()` function as the pop and push operations for stacks, respectively.
 """
 
 
@@ -20,7 +22,7 @@ class Stack:
 
     def push(self, data):
         """
-        Appends data to the top of the stack
+        Appends data to the top of the stack (self.array[-1])
         Takes O(1)
         """
         self.array.append(data)
@@ -49,7 +51,7 @@ class Stack:
 
     def print_stack(self):
         """
-        This operation prints the stack starting from the top
+        This method prints the stack starting from the top
         Takes O(n)
         """
         for i in range(len(self.array) - 1, -1, -1):
